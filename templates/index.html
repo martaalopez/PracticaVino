@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Predicción de Vino</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+
+<body>
+    <div>
+        <h1>Predicción de Calidad del Vino</h1>
+
+        <!-- Formulario para enviar datos -->
+        <form method="POST">
+            <div class="row">
+                <div class="cell">
+                    <label for="fixed_acidity">Acidez fija:</label>
+                    <input type="number" id="fixed_acidity" name="fixed_acidity" step="any" required>
+                </div>
+                <div class="cell">
+                    <label for="volatile_acidity">Acidez volátil:</label>
+                    <input type="number" id="volatile_acidity" name="volatile_acidity" step="any" required>
+                </div>
+                <div class="cell">
+                    <label for="citric_acid">Ácido cítrico:</label>
+                    <input type="number" id="citric_acid" name="citric_acid" step="any" required>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="cell">
+                    <label for="residual_sugar">Azúcar residual:</label>
+                    <input type="number" id="residual_sugar" name="residual_sugar" step="any" required>
+                </div>
+                <div class="cell">
+                    <label for="chlorides">Cloruros:</label>
+                    <input type="number" id="chlorides" name="chlorides" step="any" required>
+                </div>
+                <div class="cell">
+                    <label for="free_sulfur_dioxide">Dióxido de azufre libre:</label>
+                    <input type="number" id="free_sulfur_dioxide" name="free_sulfur_dioxide" step="any" required>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="cell">
+                    <label for="total_sulfur_dioxide">Dióxido de azufre total:</label>
+                    <input type="number" id="total_sulfur_dioxide" name="total_sulfur_dioxide" step="any" required>
+                </div>
+                <div class="cell">
+                    <label for="density">Densidad:</label>
+                    <input type="number" id="density" name="density" step="any" required>
+                </div>
+                <div class="cell">
+                    <label for="ph">pH:</label>
+                    <input type="number" id="ph" name="ph" step="any" required>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="cell">
+                    <label for="sulphates">Sulfatos:</label>
+                    <input type="number" id="sulphates" name="sulphates" step="any" required>
+                </div>
+                <div class="cell">
+                    <label for="alcohol">Alcohol:</label>
+                    <input type="number" id="alcohol" name="alcohol" step="any" required>
+                </div>
+            </div>
+
+            <button type="submit">Predecir</button>
+        </form>
+
+        <!-- Mostrar error, si hay alguno -->
+        {% if error %}
+        <div class="error">{{ error }}</div>
+        {% endif %}
+
+        <!-- Mostrar los resultados si están disponibles -->
+        {% if classificationResult is not none %}
+        <h2>Resultados de la Predicción:</h2>
+        <p><strong>Clasificación:</strong> {{ classificationResult }}</p>
+        <p><strong>Regresión:</strong> {{ regressionResult }}</p>
+        {% endif %}
+
+        <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+
+</html>
